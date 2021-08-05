@@ -79,8 +79,8 @@ export const isNotEmpty: ValidatorFunction = (input: string | any[]): [valid: bo
     return [true];
 }
 
-export function equals(val: string): ValidatorFunction {
-    const validator: ValidatorFunction = (input: string): [valid: boolean, message?: string] => {
+export function equals(val: any): ValidatorFunction {
+    const validator: ValidatorFunction = (input: any): [valid: boolean, message?: string] => {
         if (!(input === val)) {
             return [false, `does not equal \`${val}\``];
         }
