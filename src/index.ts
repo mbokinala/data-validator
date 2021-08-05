@@ -1,5 +1,4 @@
 type ValidatorFunction = (input: any) => [valid: boolean, message?: string | ValidationErrors];
-
 interface ValidationErrors {
     [key: string]: (string | ValidationErrors)[]
 }
@@ -73,23 +72,29 @@ export function isType(type: string): ValidatorFunction {
 }
 
 export const isNotEmpty: ValidatorFunction = (input: string | any[]): [valid: boolean, message?: string] => {
-    if (typeof input === 'string') {
-        if (input === "") {
-            return [false, 'is empty'];
-        }
-        return [true];
-    } else {
-        if (input.length == 0) {
-            return [false, 'is empty'];
-        }
-        return [true];
+    if (!isDefined(input)[0] || input.length === 0) {
+        return [false, 'is empty'];
     }
+
+    return [true];
 }
 
 export function equals(val: string): ValidatorFunction {
     const validator: ValidatorFunction = (input: string): [valid: boolean, message?: string] => {
         if (!(input === val)) {
             return [false, `does not equal \`${val}\``];
+        }
+
+        return [true];
+    }
+
+    return validator;
+}
+
+export function includes(element: any): ValidatorFunction {
+    const validator: ValidatorFunction = (input: any[]): [valid: boolean, message?: string] => {
+        if (!(input.includes(element))) {
+            return [false, `does not include \`${element}\``];
         }
 
         return [true];
