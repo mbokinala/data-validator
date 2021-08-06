@@ -81,15 +81,17 @@ There are some built-in validator functions (see below), but you can create cust
 ```
 
 ### Built-in validators:
-| Function                                         | Description                                                        |
-|--------------------------------------------------|--------------------------------------------------------------------|
-| `isDefined`                                      | Passes if input is not `null` or `undefined`                       |
-| `isType(type: string)`                           | Passes if input matches provided type                              |
-| `isNotEmpty`                                     | Passes if input string or array is not empty                       |
-| `equals(val: any)`                               | Passes if input matches provided value                             |
-| `includes(element: any)`                         | Passes if input array contains provided element                    |
-| `isGreaterThan(val: number)`                     | Passes if input is greater than provided value                     |
-| `isGreaterThanOrEqualTo(val: number)`            | Passes if input is greater than or equal to provided value         |
-| `isLessThan(val: number)`                        | Passes if input is less than provided value                        |
-| `isLessThanOrEqualTo(val: number)`               | Passes if input is less than or equal to provided value            |
-| `validateArray(validators: ValidatorFunction[])` | Passes if all elements in input array pass all provided validators |
+| Function                                         	| Description                                                                                                                                         	|
+|--------------------------------------------------	|-----------------------------------------------------------------------------------------------------------------------------------------------------	|
+| `isDefined`                                      	| Passes if input is not `null` or `undefined`                                                                                                        	|
+| `isType(type: string)`                           	| Passes if input matches provided type                                                                                                               	|
+| `isArray`                                        	| Passes if input is an array                                                                                                                         	|
+| `isNotEmpty`                                     	| Passes if input string or array is not empty                                                                                                        	|
+| `equals(val: any)`                               	| Passes if input matches provided value                                                                                                              	|
+| `includes(element: any)`                         	| Passes if input array contains provided element                                                                                                     	|
+| `isGreaterThan(val: number)`                     	| Passes if input is greater than provided value                                                                                                      	|
+| `isGreaterThanOrEqualTo(val: number)`            	| Passes if input is greater than or equal to provided value                                                                                          	|
+| `isLessThan(val: number)`                        	| Passes if input is less than provided value                                                                                                         	|
+| `isLessThanOrEqualTo(val: number)`               	| Passes if input is less than or equal to provided value                                                                                             	|
+| `validateArray(validators: ValidatorFunction[])` 	| Passes if all elements in input array pass all provided validators                                                                                  	|
+| `ifDefined(validators: ValidatorFunction[])`     	| Passes if input is defined or if input passes all provided validators. Useful for when a validator is only meant to be run when a value is defined. 	|

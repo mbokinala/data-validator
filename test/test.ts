@@ -1,7 +1,7 @@
-import { validate, isDefined, isNotEmpty, isType, isGreaterThan, ifDefined } from "../src/index";
+import { validate, isDefined, isNotEmpty, isType, isGreaterThan, ifDefined, equals } from "../src/index";
 
 let data = {
-    name: 'John',
+    name: '',
     age: 22,
     occupation: 'Programmer',
     colors: [
@@ -12,7 +12,7 @@ let data = {
 }
 
 let [valid, errors] = validate(data, {
-    name: [isDefined, ifDefined([isType('string'), isNotEmpty])],
+    name: [isDefined, ifDefined([equals('12')]), isNotEmpty],
     age: [isDefined, isType('number'), isGreaterThan(21)],
     occupation: [isDefined, isNotEmpty],
     colors: [isDefined]
