@@ -1,6 +1,6 @@
 # Data Validation
 
-A (work in progress) data validation library
+A (work in progress) data validation library designed to validate JSON data for REST APIs and provide useful validation error output
 
 ## Installation
 ```shell
