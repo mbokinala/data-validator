@@ -1,7 +1,7 @@
 {
   "name": "@mbokinala/data-validator",
   "description": "A data validation library designed to validate JSON data for REST APIs and provide useful validation error output",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -29,5 +29,4 @@
     "url": "https://github.com/mbokinala/data-validator/issues"
   },
   "homepage": "https://github.com/mbokinala/data-validator#readme"
-  
 }
