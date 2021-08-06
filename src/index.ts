@@ -153,6 +153,14 @@ export function isLessThanOrEqualTo(val: number): ValidatorFunction {
     return validator;
 }
 
+export const isArray: ValidatorFunction = (input: any[]): [valid: boolean, message?: string] => {
+    if (!Array.isArray(input)) {
+        return [false, 'is not an array'];
+    }
+
+    return [true];
+}
+
 /**
  * Returns a validator function that passes if all elements in the array pass all of the provided validators
  * @param validators An array of validators for all elements of the array to be checked against
