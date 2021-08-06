@@ -1,5 +1,6 @@
 {
   "name": "@mbokinala/data-validator",
+  "description": "A data validation library designed to validate JSON data for REST APIs and provide useful validation error output",
   "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -7,10 +8,26 @@
     "prepublish": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Manav Bokinala",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^4.3.5"
   },
-  "description": "[Work in progress] a data validation library (useful for json data)"
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbokinala/data-validator.git"
+  },
+  "keywords": [
+    "validation",
+    "rest",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/mbokinala/data-validator/issues"
+  },
+  "homepage": "https://github.com/mbokinala/data-validator#readme"
+  
 }
