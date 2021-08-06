@@ -1,7 +1,7 @@
 {
   "name": "@mbokinala/data-validator",
   "description": "A data validation library designed to validate JSON data for REST APIs and provide useful validation error output",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
