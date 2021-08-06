@@ -1,19 +1,19 @@
-import { validate, isDefined, isNotEmpty, isType, isGreaterThan } from "../src/index";
+import { validate, isDefined, isNotEmpty, isType, isGreaterThan, ifDefined } from "../src/index";
 
 let data = {
     name: 'John',
-    age: 18,
+    age: 22,
     occupation: 'Programmer',
     colors: [
         'red',
         'green',
         'blue'
-    ]
+    ],
 }
 
 let [valid, errors] = validate(data, {
-    name: [isDefined],
-    age: [isDefined, isType('number'), isGreaterThan(17)],
+    name: [isDefined, ifDefined([isType('string'), isNotEmpty])],
+    age: [isDefined, isType('number'), isGreaterThan(21)],
     occupation: [isDefined, isNotEmpty],
     colors: [isDefined]
 })

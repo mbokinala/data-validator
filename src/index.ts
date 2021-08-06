@@ -1,4 +1,4 @@
-type ValidatorFunction = (input: any) => [valid: boolean, message?: string | ValidationErrors];
+type ValidatorFunction = (input: any) => [valid: boolean, message?: string | string[] | ValidationErrors | ValidationErrors[] | (string | ValidationErrors)[]];
 interface ValidationErrors {
     [key: string]: (string | ValidationErrors)[]
 }
@@ -22,7 +22,11 @@ export function validate(data: Data, validators: Validators): [valid: boolean, e
                 let [valid, message] = validatorFunction(data[property]);
                 if (!valid) {
                     propValid = false;
-                    errors[property].push(message!);
+                    if (Array.isArray(message)) {
+                        errors[property].push(...message!);
+                    } else {
+                        errors[property].push(message!);
+                    }
                 }
             }
 
@@ -74,6 +78,14 @@ export function isType(type: string): ValidatorFunction {
 export const isNotEmpty: ValidatorFunction = (input: string | any[]): [valid: boolean, message?: string] => {
     if (!isDefined(input)[0] || input.length === 0) {
         return [false, 'is empty'];
+    }
+
+    return [true];
+}
+
+export const hasNoWhitespace: ValidatorFunction = (input: string): [valid: boolean, message?: string] => {
+    if (/\s/g.test(input)) {
+        return [false, 'has whitespace'];
     }
 
     return [true];
@@ -166,7 +178,7 @@ export const isArray: ValidatorFunction = (input: any[]): [valid: boolean, messa
  * @param validators An array of validators for all elements of the array to be checked against
  */
 export function validateArray(validators: ValidatorFunction[]): ValidatorFunction {
-    const arrayValidator: ValidatorFunction = (input: any[]): [valid: boolean, ValidationErrors?: ValidationErrors] => {        
+    const arrayValidator: ValidatorFunction = (input: any[]): [valid: boolean, ValidationErrors?: ValidationErrors] => {
         let allValid = true;
         let errors: ValidationErrors = {};
 
@@ -178,7 +190,11 @@ export function validateArray(validators: ValidatorFunction[]): ValidatorFunctio
                 let [valid, error] = validator(element);
                 if (!valid) {
                     allValidForElement = false;
-                    errorsForElement.push(error!);
+                    if (Array.isArray(error)) {
+                        errorsForElement.push(...error!);
+                    } else {
+                        errorsForElement.push(error!);
+                    }
                 }
             }
 
@@ -191,9 +207,39 @@ export function validateArray(validators: ValidatorFunction[]): ValidatorFunctio
         if (!allValid) {
             return [false, clean(errors)];
         }
-        
+
         return [true];
     }
 
     return arrayValidator;
+}
+
+export function ifDefined(validators: ValidatorFunction[]): ValidatorFunction {
+    const ifDefinedValidator: ValidatorFunction = (input: any): [valid: boolean, message?: (string | ValidationErrors)[]] => {
+        if (input == null) { // catches null and undefined
+            return [true];
+        }
+
+        let allValid = true;
+        let errors: (string | ValidationErrors)[] = [];
+        for (const validator of validators) {
+            let [valid, error] = validator(input);
+            if (!valid) {
+                allValid = false;
+                if (Array.isArray(error)) {
+                    errors.push(...error!);
+                } else {
+                    errors.push(error!);
+                }
+            }
+        }
+
+        if (!allValid) {
+            return [false, errors];
+        }
+
+        return [true];
+    }
+
+    return ifDefinedValidator;
 }
